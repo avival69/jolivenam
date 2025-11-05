@@ -1,9 +1,9 @@
-name: Job Watcher - scheduled
+name: Job Watcher - daily
 
 on:
   schedule:
-    - cron: '*/10 * * * *'  # every 10 minutes (UTC)
-  workflow_dispatch:
+    - cron: '30 4 * * *'   # Run daily at 10:00 AM IST
+  workflow_dispatch:        # Allow manual run anytime
 
 jobs:
   check:
@@ -23,10 +23,10 @@ jobs:
         env:
           WEBHOOK_URL: ${{ secrets.WEBHOOK_URL }}
         run: python checker.py
-      - name: Commit seen.json back to repo (optional)
+      - name: Commit seen.json back to repo
         uses: stefanzweifel/git-auto-commit-action@v4
         with:
-          commit_message: "chore: update seen state"
+          commit_message: "update seen state"
           file_pattern: "seen.json"
           author_name: "job-watcher"
           author_email: "actions@github.com"
