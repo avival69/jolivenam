@@ -2,7 +2,7 @@ name: Job Checker
 
 on:
   schedule:
-    - cron: "0 6 * * *"   # runs once daily at 6 AM IST
+    - cron: '30 4 * * *'   # Run daily at 10:00 AM IST
   workflow_dispatch:       # Allow manual run
 
 jobs:
